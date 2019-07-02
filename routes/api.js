@@ -9,7 +9,7 @@ var config=require('../config');
 router.get('/', function (req, res, next) {
   res.send('respond with a resource');
 });
-router.post('/add_customer', (req, res) => {
+router.post('/add_customer',checkLogin, (req, res) => {
   console.log(req.body);
   var { customer_id, customer_name, mobile, email } = req.body;
   pgcon.execute(`insert into customer values ($1,$2,$3,$4,1)`, [customer_id, customer_name, mobile, email], (data) => {
